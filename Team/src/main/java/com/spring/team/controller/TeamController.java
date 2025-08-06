@@ -1,6 +1,9 @@
 package com.spring.team.controller;
 
+import com.spring.team.config.ApiCall;
 import com.spring.team.model.Team;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +18,14 @@ import java.util.Map;
 @RequestMapping("/team-players")
 public class TeamController {
 
-    @GetMapping("/team/{from}/player/{to}")
+    ApiCall apiCall;
+
+    @Autowired
+    public TeamController(ApiCall apiCall){
+        this.apiCall = apiCall;
+    }
+
+    @GetMapping("/teamNew/{from}/player/{to}")
     public Team teamWithPlayer(@PathVariable  String from,@PathVariable String to){
         Map<String,String>urlAttribute = new HashMap<>();
         urlAttribute.put("from",from);
@@ -34,5 +44,14 @@ public class TeamController {
                 .note("NONE")
                 .numberTeam("50")
                 .build();
+    }
+
+    @GetMapping("/team/{from}/player/{to}")
+    public Team teamWithPlayerNew(@PathVariable  String from,@PathVariable String to){
+
+        Team team = apiCall.getFootballPlayer(from, to);
+        team.setNumberTeam("50");
+        team.setNote("NONE");
+        return team;
     }
 }
