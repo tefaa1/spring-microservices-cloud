@@ -1,6 +1,5 @@
 package com.spring.cloud.football.controller;
 
-import com.mysql.cj.x.protobuf.MysqlxResultset;
 import com.spring.cloud.football.model.PlayerTeam;
 import com.spring.cloud.football.repository.PlayersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
