@@ -27,10 +27,10 @@ public class TeamController {
         );
         Team team = teamResponseEntity.getBody();
         return Team.builder()
-                .id(1L)
+                .id(team.getId())
                 .from(team.getFrom())
                 .to(team.getTo())
-                .moneyTeam(100)
+                .moneyTeam(team.getMoneyTeam())
                 .note("NONE")
                 .numberTeam("50")
                 .build();
